@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasil Pencarian Mahasiswa</title>
+    <title>Hasil Pencarian | Sistem Akademik</title>
     <style>
         :root {
             --primary-color: #4f46e5;
@@ -27,58 +27,60 @@
             color: var(--text-main);
             display: flex;
             justify-content: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             min-height: 100vh;
         }
 
         .container {
             background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             width: 100%;
-            max-width: 900px;
-            padding: 2.5rem;
-            animation: slideUp 0.5s ease-out;
+            max-width: 1000px;
+            padding: 3rem;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         h2 {
             color: var(--text-main);
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
         }
 
         .search-info {
             display: inline-block;
             background-color: #eef2ff;
             color: var(--primary-color);
-            padding: 0.5rem 1rem;
+            padding: 0.625rem 1.5rem;
             border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
 
         .table-responsive {
             overflow-x: auto;
-            border-radius: 8px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            white-space: nowrap;
         }
 
         thead {
@@ -86,69 +88,102 @@
         }
 
         th {
-            padding: 1rem 1.5rem;
-            font-size: 0.875rem;
-            font-weight: 600;
+            padding: 1.25rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 0.1em;
+            border-bottom: 1.5px solid var(--border-color);
         }
 
         td {
-            padding: 1rem 1.5rem;
+            padding: 1.25rem 1.5rem;
             font-size: 0.95rem;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-main);
         }
 
         tbody tr {
-            transition: background-color 0.15s ease;
+            transition: all 0.2s;
         }
 
         tbody tr:hover {
-            background-color: #f9fafb;
+            background-color: #f5f3ff;
         }
 
         tbody tr:last-child td {
             border-bottom: none;
         }
 
+        .badge-prodi {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: #f3f4f6;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4b5563;
+        }
+
         .empty-state {
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             color: var(--text-muted);
         }
 
         .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #d1d5db;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
         }
 
-        .btn-back {
+        .footer-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2.5rem;
+        }
+
+        .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-top: 2rem;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+            cursor: pointer;
         }
 
-        .btn-back:hover {
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
             background-color: var(--primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -3px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-outline {
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 1.5px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: #f5f3ff;
+            transform: translateY(-2px);
         }
         
-        .btn-back svg {
-            margin-right: 0.5rem;
+        .btn svg {
+            margin-right: 0.75rem;
             width: 20px;
             height: 20px;
         }
@@ -158,12 +193,12 @@
 
 <div class="container">
     <div class="header">
-        <h2>Hasil Pencarian Mahasiswa</h2>
+        <h2>Hasil Pencarian</h2>
         <?php
         if (isset($_POST['submit'])) {
             $jenisCari = $_POST['jenisCari'];
             $dataCari  = $_POST['dataCari'];
-            echo "<div class='search-info'>Menampilkan hasil " . htmlspecialchars(ucfirst($jenisCari)) . ": <strong>" . htmlspecialchars($dataCari) . "</strong></div>";
+            echo "<div class='search-info'>Mencari " . htmlspecialchars(ucfirst($jenisCari)) . ": <strong>" . htmlspecialchars($dataCari) . "</strong></div>";
         }
         ?>
     </div>
@@ -174,19 +209,16 @@
     $password = "";
     $dbname = "kampus";
 
-    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
-        die("<div class='empty-state'>Koneksi database gagal: " . $conn->connect_error . "</div>");
+        die("<div class='empty-state'>⚠️ Koneksi database gagal: " . $conn->connect_error . "</div>");
     }
 
     if (isset($_POST['submit'])) {
         $jenisCari = $_POST['jenisCari'];
         $dataCari  = $_POST['dataCari'];
 
-        // Prepared statement logic equivalent for visual purposes (using the original SQL structure requested to remain unchanged logically)
         $sql = "SELECT * FROM mahasiswa WHERE $jenisCari LIKE '%$dataCari%'";
         $result = $conn->query($sql);
 
@@ -196,18 +228,20 @@
             echo "<thead>
                     <tr>
                         <th>NIM</th>
-                        <th>Nama</th>
-                        <th>Prodi</th>
+                        <th>Nama Lengkap</th>
+                        <th>Program Studi</th>
                         <th>Kelas</th>
+                        <th>Alamat</th>
                     </tr>
                   </thead>";
             echo "<tbody>";
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . htmlspecialchars($row["nim"]) . "</td>
-                        <td style='font-weight: 500;'>" . htmlspecialchars($row["nama"]) . "</td>
-                        <td>" . htmlspecialchars($row["prodi"]) . "</td>
-                        <td>" . htmlspecialchars($row["kelas"]) . "</td>
+                        <td style='font-family: monospace; font-weight: 600; color: #4f46e5;'>" . htmlspecialchars($row["nim"]) . "</td>
+                        <td style='font-weight: 600;'>" . htmlspecialchars($row["nama"]) . "</td>
+                        <td><span class='badge-prodi'>" . htmlspecialchars($row["prodi"]) . "</span></td>
+                        <td style='text-align: center; font-weight: 700;'>" . htmlspecialchars($row["kelas"]) . "</td>
+                        <td style='color: #6b7280;'>" . htmlspecialchars($row["alamat"]) . "</td>
                       </tr>";
             }
             echo "</tbody>";
@@ -215,27 +249,33 @@
             echo "</div>";
         } else {
             echo "<div class='empty-state'>
-                    <div class='empty-icon'>🔍</div>
-                    <h3>Data Tidak Ditemukan</h3>
-                    <p style='margin-top: 0.5rem;'>Maaf, tidak ada mahasiswa yang sesuai dengan kata kunci yang Anda masukkan.</p>
+                    <div class='empty-icon'>🕵️‍♂️</div>
+                    <h3>Tidak Ada Hasil</h3>
+                    <p style='margin-top: 0.75rem;'>Kami tidak menemukan data yang cocok dengan kriteria Anda.</p>
                   </div>";
         }
     } else {
         echo "<div class='empty-state'>
-                <div class='empty-icon'>ℹ️</div>
-                <p>Silakan melakukan pencarian melalui form pencarian.</p>
+                <div class='empty-icon'>🚀</div>
+                <p>Silakan masukkan kata kunci untuk memulai.</p>
               </div>";
     }
 
     $conn->close();
     ?>
 
-    <div style="text-align: center;">
-        <a href="cari.php" class="btn-back">
+    <div class="footer-actions">
+        <a href="cari.php" class="btn btn-outline">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Kembali Cari Data
+            Kembali Cari
+        </a>
+        <a href="tambah.php" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            Tambah Data
         </a>
     </div>
 </div>
